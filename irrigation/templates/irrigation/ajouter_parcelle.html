@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajouter une parcelle</title>
+</head>
+<body>
+
+<h1>➕ Ajouter une parcelle</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">
+        Enregistrer
+    </button>
+</form>
+
+<br>
+
+<a href="/parcelles/">Retour à la liste des parcelles</a>
+
+</body>
+</html>

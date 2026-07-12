@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modifier une parcelle</title>
+</head>
+<body>
+
+<h1>✏️ Modifier une parcelle</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">
+        Enregistrer les modifications
+    </button>
+</form>
+
+<br>
+
+<a href="/parcelles/">
+    Retour à la liste des parcelles
+</a>
+
+</body>
+</html>
