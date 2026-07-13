@@ -1,0 +1,16 @@
+<h1>✏️ Modifier une culture</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">
+        Modifier
+    </button>
+</form>
+
+<br>
+
+<a href="/cultures/">
+    Retour à la liste des cultures
+</a>

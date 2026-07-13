@@ -41,3 +41,4 @@ class Irrigation(models.Model):
 
     def __str__(self):
         return f"{self.parcelle.nom} - {self.date}"
+ 

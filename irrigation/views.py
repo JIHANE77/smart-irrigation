@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Parcelle, Culture, Meteo, Irrigation
-from .forms import ParcelleForm
+from .forms import ParcelleForm ,CultureForm
 def home(request):
     context = {
         'parcelles': Parcelle.objects.count(),
@@ -21,7 +21,6 @@ def parcelles(request):
         {'parcelles': liste_parcelles}
     )
 from .forms import ParcelleForm
-from django.shortcuts import redirect
 
 def ajouter_parcelle(request):
     if request.method == 'POST':
@@ -63,3 +62,82 @@ def supprimer_parcelle(request, id):
     parcelle.delete()
 
     return redirect('parcelles')
+
+def cultures(request):
+    liste_cultures = Culture.objects.all()
+
+    return render(
+        request,
+        'irrigation/cultures.html',
+        {'cultures': liste_cultures}
+    ) 
+def ajouter_culture(request):
+    if request.method == 'POST':
+        form = CultureForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('cultures')
+
+    else:
+        form = CultureForm()
+
+    return render(
+        request,
+        'irrigation/ajouter_culture.html',
+        {'form': form}
+    )
+def cultures(request):
+    liste_cultures = Culture.objects.all()
+
+    return render(
+        request,
+        'irrigation/cultures.html',
+        {'cultures': liste_cultures}
+    )
+
+
+def ajouter_culture(request):
+    if request.method == 'POST':
+        form = CultureForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('cultures')
+
+    else:
+        form = CultureForm()
+
+    return render(
+        request,
+        'irrigation/ajouter_culture.html',
+        {'form': form}
+    )
+
+
+def modifier_culture(request, id):
+    culture = get_object_or_404(Culture, id=id)
+
+    if request.method == 'POST':
+        form = CultureForm(request.POST, instance=culture)
+
+        if form.is_valid():
+            form.save()
+            return redirect('cultures')
+
+    else:
+        form = CultureForm(instance=culture)
+
+    return render(
+        request,
+        'irrigation/modifier_culture.html',
+        {'form': form}
+    )
+
+
+def supprimer_culture(request, id):
+    culture = get_object_or_404(Culture, id=id)
+
+    culture.delete()
+
+    return redirect('cultures')

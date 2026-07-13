@@ -1,0 +1,39 @@
+<h1>🌾 Liste des cultures</h1>
+
+<table border="1">
+    <tr>
+        <th>Nom</th>
+        <th>Date plantation</th>
+        <th>Stade</th>
+        <th>Kc</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for culture in cultures %}
+    <tr>
+        <td>{{ culture.nom }}</td>
+        <td>{{ culture.date_plantation }}</td>
+        <td>{{ culture.stade }}</td>
+        <td>{{ culture.kc }}</td>
+
+        <td>
+            <a href="/modifier-culture/{{ culture.id }}/">
+                Modifier
+            </a>
+
+            |
+
+            <a href="/supprimer-culture/{{ culture.id }}/">
+                Supprimer
+            </a>
+        </td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+<br>
+
+<a href="/ajouter-culture/">
+    Ajouter une nouvelle culture
+</a>
