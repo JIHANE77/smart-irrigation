@@ -1,5 +1,5 @@
 from django import forms
-from .models import Parcelle, Culture, Meteo
+from .models import Parcelle, Culture, Meteo , Irrigation
 
 class ParcelleForm(forms.ModelForm):
     class Meta:
@@ -13,4 +13,8 @@ class CultureForm(forms.ModelForm):
 class MeteoForm(forms.ModelForm):
     class Meta:
         model = Meteo
+        fields = '__all__'
+class IrrigationForm(forms.ModelForm):
+    class Meta:
+        model = Irrigation
         fields = '__all__'

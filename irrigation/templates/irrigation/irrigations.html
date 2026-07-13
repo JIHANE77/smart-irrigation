@@ -1,0 +1,32 @@
+<h1>💧 Liste des irrigations</h1>
+
+<table border="1">
+    <tr>
+        <th>Parcelle</th>
+        <th>Date</th>
+        <th>Volume</th>
+        <th>Durée</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for irrigation in irrigations %}
+    <tr>
+        <td>{{ irrigation.parcelle }}</td>
+        <td>{{ irrigation.date }}</td>
+        <td>{{ irrigation.volume }}</td>
+        <td>{{ irrigation.duree }}</td>
+
+        <td>
+            <a href="/modifier-irrigation/{{ irrigation.id }}/">Modifier</a>
+            |
+            <a href="/supprimer-irrigation/{{ irrigation.id }}/">Supprimer</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+
+<a href="/ajouter-irrigation/">
+    Ajouter une irrigation
+</a>

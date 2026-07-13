@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Parcelle, Culture, Meteo, Irrigation
-from .forms import ParcelleForm ,CultureForm,  MeteoForm
+from .forms import ParcelleForm ,CultureForm,  MeteoForm , IrrigationForm
 def home(request):
     context = {
         'parcelles': Parcelle.objects.count(),
@@ -196,3 +196,57 @@ def supprimer_meteo(request, id):
     meteo.delete()
 
     return redirect('meteos')
+def irrigations(request):
+    liste_irrigations = Irrigation.objects.all()
+
+    return render(
+        request,
+        'irrigation/irrigations.html',
+        {'irrigations': liste_irrigations}
+    )
+
+
+def ajouter_irrigation(request):
+    if request.method == 'POST':
+        form = IrrigationForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('irrigations')
+
+    else:
+        form = IrrigationForm()
+
+    return render(
+        request,
+        'irrigation/ajouter_irrigation.html',
+        {'form': form}
+    )
+
+
+def modifier_irrigation(request, id):
+    irrigation = get_object_or_404(Irrigation, id=id)
+
+    if request.method == 'POST':
+        form = IrrigationForm(request.POST, instance=irrigation)
+
+        if form.is_valid():
+            form.save()
+            return redirect('irrigations')
+
+    else:
+        form = IrrigationForm(instance=irrigation)
+
+    return render(
+        request,
+        'irrigation/modifier_irrigation.html',
+        {'form': form}
+    )
+
+
+def supprimer_irrigation(request, id):
+    irrigation = get_object_or_404(Irrigation, id=id)
+
+    irrigation.delete()
+
+    return redirect('irrigations')

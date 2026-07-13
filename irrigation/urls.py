@@ -17,4 +17,9 @@ urlpatterns = [
     path('ajouter-meteo/', views.ajouter_meteo, name='ajouter_meteo'),
     path('modifier-meteo/<int:id>/', views.modifier_meteo, name='modifier_meteo'),
     path('supprimer-meteo/<int:id>/', views.supprimer_meteo, name='supprimer_meteo'),
+
+    path('irrigations/', views.irrigations, name='irrigations'),
+    path('ajouter-irrigation/', views.ajouter_irrigation, name='ajouter_irrigation'),
+    path('modifier-irrigation/<int:id>/', views.modifier_irrigation, name='modifier_irrigation'),
+    path('supprimer-irrigation/<int:id>/', views.supprimer_irrigation, name='supprimer_irrigation'),
 ]

@@ -1,0 +1,16 @@
+<h1>💧 Ajouter une irrigation</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">
+        Enregistrer
+    </button>
+</form>
+
+<br>
+
+<a href="/irrigations/">
+    Retour à la liste des irrigations
+</a>
