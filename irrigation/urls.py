@@ -24,4 +24,6 @@ urlpatterns = [
     path('supprimer-irrigation/<int:id>/', views.supprimer_irrigation, name='supprimer_irrigation'),
 
     path('recommandations/', views.recommandations, name='recommandations'),
+
+    path('export-pdf/', views.exporter_pdf, name='export_pdf'),
 ]

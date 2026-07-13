@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Parcelle, Culture, Meteo, Irrigation
 from .forms import ParcelleForm ,CultureForm,  MeteoForm , IrrigationForm
+from django.http import HttpResponse
+from reportlab.pdfgen import canvas
 def home(request):
     context = {
         'parcelles': Parcelle.objects.count(),
@@ -288,3 +290,36 @@ def recommandations(request):
         'irrigation/recommandations.html',
         {'resultats': resultats}
     )
+def exporter_pdf(request):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="rapport_irrigation.pdf"'
+
+    p = canvas.Canvas(response)
+
+    p.drawString(100, 800, "Rapport Smart Irrigation")
+    p.drawString(100, 770, "Projet de gestion intelligente de l'irrigation")
+
+    y = 730
+
+    cultures = Culture.objects.all()
+    meteo = Meteo.objects.last()
+
+    if meteo:
+        for culture in cultures:
+            etc = meteo.eto * culture.kc
+            besoin = max(0, etc - meteo.precipitation)
+            volume = culture.parcelle.surface * besoin * 10
+
+            texte = (
+                f"{culture.parcelle.nom} | "
+                f"ET0={meteo.eto} | "
+                f"Kc={culture.kc} | "
+                f"Besoin={round(besoin,2)} | "
+                f"Volume={round(volume,2)}"
+            )
+
+            p.drawString(50, y, texte)
+            y -= 25
+
+    p.save()
+    return response
