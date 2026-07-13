@@ -1,0 +1,40 @@
+<h1>🌤️ Liste des données météo</h1>
+
+<table border="1">
+    <tr>
+        <th>Date</th>
+        <th>Température</th>
+        <th>Humidité</th>
+        <th>Vent</th>
+        <th>ET0</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for meteo in meteos %}
+    <tr>
+        <td>{{ meteo.date }}</td>
+        <td>{{ meteo.temperature }}</td>
+        <td>{{ meteo.humidite }}</td>
+        <td>{{ meteo.vent }}</td>
+        <td>{{ meteo.eto }}</td>
+
+        <td>
+            <a href="/modifier-meteo/{{ meteo.id }}/">
+                Modifier
+            </a>
+
+            |
+
+            <a href="/supprimer-meteo/{{ meteo.id }}/">
+                Supprimer
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+
+<a href="/ajouter-meteo/">
+    Ajouter une donnée météo
+</a>

@@ -1,0 +1,16 @@
+<h1>✏️ Modifier une donnée météo</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">
+        Modifier
+    </button>
+</form>
+
+<br>
+
+<a href="/meteos/">
+    Retour à la liste météo
+</a>

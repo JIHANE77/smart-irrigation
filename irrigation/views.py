@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Parcelle, Culture, Meteo, Irrigation
-from .forms import ParcelleForm ,CultureForm
+from .forms import ParcelleForm ,CultureForm,  MeteoForm
 def home(request):
     context = {
         'parcelles': Parcelle.objects.count(),
@@ -141,3 +141,58 @@ def supprimer_culture(request, id):
     culture.delete()
 
     return redirect('cultures')
+
+def meteos(request):
+    liste_meteos = Meteo.objects.all()
+
+    return render(
+        request,
+        'irrigation/meteos.html',
+        {'meteos': liste_meteos}
+    )
+
+
+def ajouter_meteo(request):
+    if request.method == 'POST':
+        form = MeteoForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('meteos')
+
+    else:
+        form = MeteoForm()
+
+    return render(
+        request,
+        'irrigation/ajouter_meteo.html',
+        {'form': form}
+    )
+
+
+def modifier_meteo(request, id):
+    meteo = get_object_or_404(Meteo, id=id)
+
+    if request.method == 'POST':
+        form = MeteoForm(request.POST, instance=meteo)
+
+        if form.is_valid():
+            form.save()
+            return redirect('meteos')
+
+    else:
+        form = MeteoForm(instance=meteo)
+
+    return render(
+        request,
+        'irrigation/modifier_meteo.html',
+        {'form': form}
+    )
+
+
+def supprimer_meteo(request, id):
+    meteo = get_object_or_404(Meteo, id=id)
+
+    meteo.delete()
+
+    return redirect('meteos')
