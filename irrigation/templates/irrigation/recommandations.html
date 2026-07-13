@@ -13,6 +13,8 @@
         <th>ET0</th>
         <th>Kc</th>
         <th>ETc</th>
+        <th>Besoin en eau</th>
+        <th>Volume</th>
         <th>Décision</th>
     </tr>
 
@@ -22,11 +24,13 @@
         <td>{{ resultat.eto }}</td>
         <td>{{ resultat.kc }}</td>
         <td>{{ resultat.etc }}</td>
+        <td>{{ resultat.besoin }}</td>
+        <td>{{ resultat.volume }}</td>
         <td>{{ resultat.decision }}</td>
     </tr>
     {% empty %}
     <tr>
-        <td colspan="5">Aucune donnée disponible.</td>
+        <td colspan="7">Aucune donnée disponible.</td>
     </tr>
     {% endfor %}
 </table>
@@ -34,6 +38,7 @@
 <br>
 
 <a href="/">🏠 Retour au Dashboard</a>
+
 
 </body>
 </html>

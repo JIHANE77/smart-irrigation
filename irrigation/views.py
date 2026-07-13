@@ -263,9 +263,14 @@ def recommandations(request):
         for culture in cultures:
             etc = meteo.eto * culture.kc
 
-            decision = "✅ Pas d'irrigation nécessaire"
+            besoin = etc - meteo.precipitation
+            if besoin < 0:
+                besoin = 0
 
-            if culture.parcelle.reserve_actuelle < culture.parcelle.seuil_minimum:
+            volume = culture.parcelle.surface * besoin * 10
+
+            decision = "✅ Pas d'irrigation nécessaire"
+            if besoin > 0:
                 decision = "⚠️ Irrigation recommandée"
 
             resultats.append({
@@ -273,7 +278,9 @@ def recommandations(request):
                 'eto': meteo.eto,
                 'kc': culture.kc,
                 'etc': round(etc, 2),
-                'decision': decision
+                'besoin': round(besoin, 2),
+                'volume': round(volume, 2),
+                'decision': decision,
             })
 
     return render(
