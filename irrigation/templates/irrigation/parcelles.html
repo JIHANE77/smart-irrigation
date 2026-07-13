@@ -14,6 +14,7 @@
             <th>Surface</th>
             <th>Type de sol</th>
             <th>Localisation</th>
+            <th>Actions</th>
         </tr>
 
         {% for parcelle in parcelles %}
@@ -23,7 +24,18 @@
             <td>{{ parcelle.surface }}</td>
             <td>{{ parcelle.type_sol }}</td>
             <td>{{ parcelle.localisation }}</td>
+            <td>
+               <a href="/modifier-parcelle/{{ parcelle.id }}/"
+   style="background:green;color:white;padding:5px 10px;border-radius:5px;text-decoration:none;">
+   ✏️ Modifier
+               </a>
+
+               <a href="/supprimer-parcelle/{{ parcelle.id }}/"
+   style="background:red;color:white;padding:5px 10px;border-radius:5px;text-decoration:none;">
+   🗑️ Supprimer
+            </a>
         </tr>
+
         {% endfor %}
 
     </table>

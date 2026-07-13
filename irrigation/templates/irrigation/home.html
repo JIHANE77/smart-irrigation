@@ -37,7 +37,19 @@
 
 </head>
 <body>
+    <nav style="margin-bottom:30px;">
+    <a href="/" style="margin-right:20px;">🏠 Dashboard</a>
 
+    <a href="/parcelles/" style="margin-right:20px;">📍 Parcelles</a>
+
+    <a href="/cultures/" style="margin-right:20px;">🌾 Cultures</a>
+
+    <a href="/irrigations/" style="margin-right:20px;">💧 Irrigations</a>
+
+    <a href="/meteos/" style="margin-right:20px;">🌤️ Météo</a>
+
+    <a href="/recommandations/">🌱 Recommandations</a>
+</nav>
     <h1>🌱 Smart Irrigation Dashboard</h1>
 
     <div class="cards">
@@ -69,5 +81,35 @@
 <br><br>
 
 <a href="/">🏠 Retour au Dashboard</a>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="dashboardChart" width="400" height="150"></canvas>
+
+<script>
+const ctx = document.getElementById('dashboardChart');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Parcelles', 'Cultures', 'Irrigations', 'Météo'],
+        datasets: [{
+            label: 'Nombre',
+            data: [
+                {{ parcelles }},
+                {{ cultures }},
+                {{ irrigations }},
+                {{ meteo }}
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
 </body>
 </html>
