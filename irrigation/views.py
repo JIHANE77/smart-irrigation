@@ -250,3 +250,34 @@ def supprimer_irrigation(request, id):
     irrigation.delete()
 
     return redirect('irrigations')
+def recommandations(request):
+    parcelles = Parcelle.objects.all()
+    cultures = Culture.objects.all()
+    meteos = Meteo.objects.all()
+
+    resultats = []
+
+    if cultures.exists() and meteos.exists():
+        meteo = meteos.last()
+
+        for culture in cultures:
+            etc = meteo.eto * culture.kc
+
+            decision = "✅ Pas d'irrigation nécessaire"
+
+            if culture.parcelle.reserve_actuelle < culture.parcelle.seuil_minimum:
+                decision = "⚠️ Irrigation recommandée"
+
+            resultats.append({
+                'parcelle': culture.parcelle.nom,
+                'eto': meteo.eto,
+                'kc': culture.kc,
+                'etc': round(etc, 2),
+                'decision': decision
+            })
+
+    return render(
+        request,
+        'irrigation/recommandations.html',
+        {'resultats': resultats}
+    )

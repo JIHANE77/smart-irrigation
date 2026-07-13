@@ -22,4 +22,6 @@ urlpatterns = [
     path('ajouter-irrigation/', views.ajouter_irrigation, name='ajouter_irrigation'),
     path('modifier-irrigation/<int:id>/', views.modifier_irrigation, name='modifier_irrigation'),
     path('supprimer-irrigation/<int:id>/', views.supprimer_irrigation, name='supprimer_irrigation'),
+
+    path('recommandations/', views.recommandations, name='recommandations'),
 ]
