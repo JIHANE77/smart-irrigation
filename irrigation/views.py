@@ -260,30 +260,35 @@ def recommandations(request):
     resultats = []
 
     if cultures.exists() and meteos.exists():
-        meteo = meteos.last()
+       meteo = meteos.last()
 
-        for culture in cultures:
-            etc = meteo.eto * culture.kc
+       for culture in cultures:
+           etc = meteo.eto * culture.kc
 
-            besoin = etc - meteo.precipitation
-            if besoin < 0:
-                besoin = 0
+           besoin = etc - meteo.precipitation
+           if besoin < 0:
+              besoin = 0
 
-            volume = culture.parcelle.surface * besoin * 10
+           volume = culture.parcelle.surface * besoin * 10
 
-            decision = "✅ Pas d'irrigation nécessaire"
-            if besoin > 0:
-                decision = "⚠️ Irrigation recommandée"
+           if besoin == 0:
+              decision = "🟢 Pas d'irrigation nécessaire"
+           elif besoin < 3:
+              decision = "🟡 Irrigation légère recommandée"
+           elif besoin < 6:
+              decision = "🟠 Irrigation recommandée"
+           else:
+              decision = "🔴 Irrigation urgente"
 
-            resultats.append({
-                'parcelle': culture.parcelle.nom,
-                'eto': meteo.eto,
-                'kc': culture.kc,
-                'etc': round(etc, 2),
-                'besoin': round(besoin, 2),
-                'volume': round(volume, 2),
-                'decision': decision,
-            })
+           resultats.append({
+              'parcelle': culture.parcelle.nom,
+              'eto': meteo.eto,
+              'kc': culture.kc,
+              'etc': round(etc, 2),
+              'besoin': round(besoin, 2),
+              'volume': round(volume, 2),
+              'decision': decision,
+        })
 
     return render(
         request,
