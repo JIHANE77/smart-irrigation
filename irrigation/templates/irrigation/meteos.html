@@ -26,7 +26,8 @@
 </a>
 
 <a href="/supprimer-meteo/{{ meteo.id }}/"
-   class="btn btn-danger btn-sm">
+   class="btn btn-danger btn-sm"
+   onclick="return confirm('Voulez-vous vraiment supprimer ce meteo ?')">
     🗑️ Supprimer
 </a>
         </td>
@@ -38,5 +39,8 @@
 
 <a href="/ajouter-meteo/" class="btn btn-success mb-3">
     ➕ Ajouter une donnée météo
+</a>
+<a href="/" class="btn btn-secondary mt-3">
+    🏠 Retour au Dashboard
 </a>
 </div>

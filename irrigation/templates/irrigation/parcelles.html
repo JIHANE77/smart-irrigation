@@ -29,20 +29,24 @@
    class="btn btn-primary btn-sm">
     ✏️ Modifier
 </a>
-
 <a href="/supprimer-parcelle/{{ parcelle.id }}/"
-   class="btn btn-danger btn-sm">
-    🗑️ Supprimer
+   class="btn btn-danger btn-sm"
+   onclick="return confirm('Voulez-vous vraiment supprimer cette parcelle ?')">
+   🗑 Supprimer
 </a> 
+</td>
         </tr>
 
         {% endfor %}
 
     </table>
-    <br><br>
+    <br></br>
 
 <a href="/ajouter-parcelle/" class="btn btn-success">
     ➕ Ajouter une nouvelle parcelle
+</a>
+<a href="/" class="btn btn-secondary mt-3">
+    🏠 Retour au Dashboard
 </a>
 </div>
 </body>
