@@ -1,6 +1,8 @@
-<h1>🌾 Liste des cultures</h1>
+<h1 class="text-center mb-4">🌾 Liste des cultures</h1>
+<div class="container mt-5">
+<table class="table table-striped table-bordered table-hover shadow">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<table border="1">
     <tr>
         <th>Nom</th>
         <th>Date plantation</th>
@@ -17,15 +19,15 @@
         <td>{{ culture.kc }}</td>
 
         <td>
-            <a href="/modifier-culture/{{ culture.id }}/">
-                Modifier
-            </a>
+            <a href="/modifier-culture/{{ culture.id }}/"
+   class="btn btn-primary btn-sm">
+    ✏️ Modifier
+</a>
 
-            |
-
-            <a href="/supprimer-culture/{{ culture.id }}/">
-                Supprimer
-            </a>
+<a href="/supprimer-culture/{{ culture.id }}/"
+   class="btn btn-danger btn-sm">
+    🗑️ Supprimer
+</a>
         </td>
     </tr>
 
@@ -34,6 +36,7 @@
 
 <br>
 
-<a href="/ajouter-culture/">
-    Ajouter une nouvelle culture
+<a href="/ajouter-culture/" class="btn btn-success mb-3">
+    ➕ Ajouter une culture
 </a>
+</div> 

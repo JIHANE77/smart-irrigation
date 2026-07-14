@@ -1,6 +1,7 @@
-<h1>💧 Liste des irrigations</h1>
-
-<table border="1">
+<h1 class="text-center mb-4">💧 Liste des irrigations</h1>
+<div class="container mt-5"> 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<table class="table table-striped table-bordered table-hover shadow">
     <tr>
         <th>Parcelle</th>
         <th>Date</th>
@@ -17,9 +18,15 @@
         <td>{{ irrigation.duree }}</td>
 
         <td>
-            <a href="/modifier-irrigation/{{ irrigation.id }}/">Modifier</a>
-            |
-            <a href="/supprimer-irrigation/{{ irrigation.id }}/">Supprimer</a>
+          <a href="/modifier-irrigation/{{ irrigation.id }}/"
+   class="btn btn-primary btn-sm">
+    ✏️ Modifier
+</a>
+
+<a href="/supprimer-irrigation/{{ irrigation.id }}/"
+   class="btn btn-danger btn-sm">
+    🗑️ Supprimer
+</a>
         </td>
     </tr>
     {% endfor %}
@@ -27,6 +34,7 @@
 
 <br>
 
-<a href="/ajouter-irrigation/">
-    Ajouter une irrigation
+<a href="/ajouter-irrigation/" class="btn btn-success mb-3">
+    ➕ Ajouter une irrigation
 </a>
+</div>

@@ -2,12 +2,12 @@
 <html>
 <head>
     <title>Liste des parcelles</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
-    <h1>📍 Liste des parcelles</h1>
-
-    <table border="1" cellpadding="10">
+    <div class="container mt-5">
+    <h1 class="text-center mb-4">📍 Liste des parcelles</h1>
+    <table class="table table-striped table-bordered table-hover shadow">
         <tr>
             <th>Code</th>
             <th>Nom</th>
@@ -25,15 +25,15 @@
             <td>{{ parcelle.type_sol }}</td>
             <td>{{ parcelle.localisation }}</td>
             <td>
-               <a href="/modifier-parcelle/{{ parcelle.id }}/"
-   style="background:green;color:white;padding:5px 10px;border-radius:5px;text-decoration:none;">
-   ✏️ Modifier
-               </a>
+        <a href="/modifier-parcelle/{{ parcelle.id }}/"
+   class="btn btn-primary btn-sm">
+    ✏️ Modifier
+</a>
 
-               <a href="/supprimer-parcelle/{{ parcelle.id }}/"
-   style="background:red;color:white;padding:5px 10px;border-radius:5px;text-decoration:none;">
-   🗑️ Supprimer
-            </a>
+<a href="/supprimer-parcelle/{{ parcelle.id }}/"
+   class="btn btn-danger btn-sm">
+    🗑️ Supprimer
+</a> 
         </tr>
 
         {% endfor %}
@@ -41,9 +41,9 @@
     </table>
     <br><br>
 
-<a href="/ajouter-parcelle/">
+<a href="/ajouter-parcelle/" class="btn btn-success">
     ➕ Ajouter une nouvelle parcelle
 </a>
-
+</div>
 </body>
 </html>
