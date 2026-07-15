@@ -252,3 +252,36 @@ def exporter_pdf(request):
 
     p.save()
     return response
+
+from django.http import HttpResponseForbidden
+from datetime import date
+import os
+
+def cron_fetch_meteo(request):
+    # Protection simple par clé secrète dans l'URL
+    secret = request.GET.get('key')
+    if secret != os.environ.get('CRON_SECRET', 'irrig-smart-2026-Kx9pL'):
+        return HttpResponseForbidden("Accès refusé")
+
+    url = (
+        "https://api.open-meteo.com/v1/forecast"
+        "?latitude=34.26&longitude=-6.58"
+        "&current=temperature_2m,relative_humidity_2m,wind_speed_10m,"
+        "precipitation,shortwave_radiation"
+    )
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        data = response.json()["current"]
+    except Exception as e:
+        return HttpResponse(f"Erreur API météo : {e}", status=500)
+
+    meteo = Meteo.objects.create(
+        date=date.today(),
+        temperature=data["temperature_2m"],
+        humidite=data["relative_humidity_2m"],
+        vent=data["wind_speed_10m"],
+        rayonnement=data.get("shortwave_radiation", 0) * 0.0864,
+        precipitation=data["precipitation"],
+    )
+    return HttpResponse(f"OK - Meteo enregistree {meteo.date} - ETo={meteo.eto}")

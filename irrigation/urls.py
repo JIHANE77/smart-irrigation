@@ -28,4 +28,6 @@ urlpatterns = [
     path('recommandations/', views.recommandations, name='recommandations'),
 
     path('export-pdf/', views.exporter_pdf, name='export_pdf'),
+
+    path('cron/fetch-meteo/', views.cron_fetch_meteo, name='cron_fetch_meteo'),
 ]
