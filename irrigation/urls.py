@@ -7,6 +7,8 @@ urlpatterns = [
     path('ajouter-parcelle/', views.ajouter_parcelle, name='ajouter_parcelle'),
     path('modifier-parcelle/<int:id>/', views.modifier_parcelle, name='modifier_parcelle'),
     path('supprimer-parcelle/<int:id>/', views.supprimer_parcelle, name='supprimer_parcelle'),
+    path('meteo/', views.meteo_auto, name='meteo'),
+
 
     path('cultures/', views.cultures, name='cultures'),
     path('ajouter-culture/', views.ajouter_culture, name='ajouter_culture'),
